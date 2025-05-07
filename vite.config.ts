@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   
-  //pglite
+  // pglite
   optimizeDeps:{
     exclude: ['@electric-sql/pglite'],
   },
@@ -23,5 +23,9 @@ export default defineConfig({
   //Additional configuration for the Multi-tab Worker
   worker: {
     format: 'es',
+  },
+  //
+  build: {
+    target: "ES2022" // <--------- ✅✅✅✅✅✅
   },
 })

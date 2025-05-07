@@ -120,11 +120,11 @@ export function AddPatientForm() {
     return (
         <Dialog open={open} onOpenChange={setOpen} >
             <DialogTrigger asChild>
-                <Button className="cursor-pointer" variant={'outline'} > <Plus className="h-4 w-4" /> Register New Patient</Button>
+                <Button className="cursor-pointer" variant={'outline'}> <Plus className="h-4 w-4" /> Register New Patient</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[900px] flex flex-col h-[80vh]">
+            <DialogContent className="sm:max-w-[900px] flex flex-col">
                 <DialogHeader className="p-6 pb-2">
-                    <div className="flex ">
+                    <div className="flex">
                         <DialogTitle>Patient Registration Form</DialogTitle>
                     </div>
                     <DialogDescription>Please fill out all required information to register as a new patient.</DialogDescription>
@@ -149,7 +149,7 @@ export function AddPatientForm() {
                       
                     })}>
                         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                            <div className="px-6">
+                            <div className="md:px-6">
                                 <TabsList className="grid grid-cols-4 w-full">
                                     <TabsTrigger value="personal">Personal</TabsTrigger>
                                     <TabsTrigger value="contact">Contact</TabsTrigger>
@@ -160,7 +160,7 @@ export function AddPatientForm() {
 
                             <ScrollArea className="pt-2 md:h-96 rounded-md border p-4">
                                 <TabsContent value="personal" className="mt-2 space-y-4 px-3">
-                                    <h3 className="text-lg font-medium">Personal Information</h3>
+                                    <h3 className="text-base md:text-lg font-medium">Personal Information</h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <FormField
                                             control={form.control}
@@ -251,7 +251,7 @@ export function AddPatientForm() {
                                     </div>
 
                                     <div className="flex justify-end space-x-2 pt-4">
-                                        <Button type="button" variant="outline" onClick={async () => {
+                                        <Button  className="text-xs md:text-base" type="button" variant="outline" onClick={async () => {
                                             const isValid = await form.trigger(['firstName', 'lastName', 'dateOfBirth', 'gender'], { shouldFocus: true })
                                             console.log(isValid);
 
@@ -352,10 +352,10 @@ export function AddPatientForm() {
                                     />
 
                                     <div className="flex justify-between space-x-2 pt-4">
-                                        <Button type="button" variant="outline" onClick={() => setActiveTab("personal")}>
+                                        <Button  className="text-xs md:text-base" type="button" variant="outline" onClick={() => setActiveTab("personal")}>
                                             Previous
                                         </Button>
-                                        <Button type="button" variant="outline" onClick={async () => {
+                                        <Button className="text-xs md:text-base" type="button" variant="outline" onClick={async () => {
                                             const isValid = await form.trigger(['email', 'phone', 'address', 'city', 'state', 'zipCode'], { shouldFocus: true })
                                             if (isValid) setActiveTab("insurance")
                                         }}
@@ -431,10 +431,10 @@ export function AddPatientForm() {
                                     </div>
 
                                     <div className="flex justify-between space-x-2 pt-4">
-                                        <Button type="button" variant="outline" onClick={() => setActiveTab("contact")}>
+                                        <Button className="text-xs md:text-base" type="button" variant="outline" onClick={() => setActiveTab("contact")}>
                                             Previous
                                         </Button>
-                                        <Button type="button" variant="outline" onClick={async () => {
+                                        <Button type="button" className="text-xs md:text-base" variant="outline" onClick={async () => {
                                             const isValid = await form.trigger(['insuranceProvider', 'insuranceNumber', 'emergencyContactName', 'emergencyContactPhone',], { shouldFocus: true })
                                             if (isValid) setActiveTab("medical")
                                         }}>
@@ -455,11 +455,11 @@ export function AddPatientForm() {
                                                 <FormControl>
                                                     <Textarea
                                                         placeholder="Please list any relevant medical conditions, allergies, or medications..."
-                                                        className="min-h-[120px]"
+                                                        className="min-h-[120px] text-xs md:text-base"
                                                         {...field}
                                                     />
                                                 </FormControl>
-                                                <FormDescription>
+                                                <FormDescription className="text-xs md:text-base">
                                                     This information will be kept confidential and only used for medical purposes.
                                                 </FormDescription>
                                                 <FormMessage />
@@ -468,10 +468,10 @@ export function AddPatientForm() {
                                     />
 
                                     <div className="flex justify-between space-x-2 pt-4">
-                                        <Button type="button" variant="outline" onClick={() => setActiveTab("insurance")}>
+                                        <Button className="text-xs md:text-base" type="button" variant="outline" onClick={() => setActiveTab("insurance")}>
                                             Previous
                                         </Button>
-                                        <Button type="submit">Submit Registration</Button>
+                                        <Button className="text-xs md:text-base" type="submit">Submit Registration</Button>
                                     </div>
                                 </TabsContent>
                             </ScrollArea>
