@@ -1,26 +1,35 @@
 import { AddPatientForm } from "@/components/patients-form";
 import { columns } from "@/components/patients/columns";
 import { PatientsDataTable } from "@/components/patients/data-table";
+import { DataTableSkeleton } from "@/components/patients/data-table-skeleton";
+import { SqlQueryBox } from "@/components/sql-query-box";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import { TPatient } from "@/lib/types";
 import { useLiveQuery } from "@electric-sql/pglite-react";
 import { MoonIcon, SunIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export function Page() {
     const patientsQuery = useLiveQuery<TPatient>(`select * from patients`)
-
     const data = patientsQuery?.rows;
-    console.log(data);
+    const [patients, setPatients] = useState<TPatient[] | undefined>()
 
-    if (!data) return <> loading </>
+    useEffect(() => {
+        setPatients(data)
+    }, [data])
 
-    return <div className="flex flex-col p-4 gap-4 mx-auto py-10">
+
+    return <div className="flex h-screen flex-col p-4 gap-4 mx-auto py-10">
         <div className="flex justify-end items-center gap-4">
             <AddPatientForm />
             <ThemeMode />
         </div>
-        <PatientsDataTable columns={columns} data={data} />
+        <div className="max-h-96 overflow-scroll">
+            {!patients ? <DataTableSkeleton /> :
+                <PatientsDataTable columns={columns} data={patients} />}
+        </div>
+        <SqlQueryBox setPatients={setPatients} />
     </div>
 }
 
